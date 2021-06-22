@@ -29,7 +29,11 @@ def move(letter):
     # Asks user to input a move and validate it, if valid adds it to board
     while True:
         pos = int(input(f'Enter a position to place an {letter} (0-8): '))
-        assert pos in range(9) # Assert choice is valid
+        try:
+            assert pos in range(9) # Assert choice is valid
+        except AssertionError:
+            print('Invalid position! Try Again!')
+            continue # try again
         if is_free(pos):
             insert_letter(letter, pos)
             break
@@ -79,7 +83,7 @@ while True:
     print()
     choice=input('Do you want to play again? (Y/N): ').upper()
     print()
-    assert choice in ['N', 'Y'] # Assert choice is valid
-    if choice=='N':
-        print('OK')
-        break # loop terminates
+    if choice=='Y':
+         continue # next iteration
+    print('OK')
+    break # terminates
