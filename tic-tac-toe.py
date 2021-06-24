@@ -83,7 +83,6 @@ while True:
     print()
     choice=input('Do you want to play again? (Y/N): ').upper()
     print()
-    if choice=='Y':
-         continue # next iteration
-    print('OK')
-    break # terminates
+    if choice=='N':
+        print('OK')
+        break # terminates
