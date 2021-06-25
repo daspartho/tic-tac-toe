@@ -39,22 +39,40 @@ def move(letter):
             break
         else:
             print('Position already occupied!')
-            
-def winner(): # returns winning letter if there is a winner else returns None
-    # Checks rows for a straight line
+
+def vertical_winner():
+    """Check for winner vertically."""
     for i in range(3):
-        if board[i]==board[i+3]==board[i+6]:
+        if board[i] == board[i + 3] == board[i + 6]:
             return board[i]
-    # Checks columns for a straight line
+
+def horizontal_winner():
+    """Check for winner horizontally."""
     for i in range(0,7,3):
         if board[i]==board[i+1]==board[i+2]:
             return board[i]
-    # Checks diagonals for a straight line
+
+def diagonal_winner():
+    """Check for diagonal winner."""
     if board[0]==board[4]==board[8]:
         return board[0]
     if board[2]==board[4]==board[6]:
         return board[2]
+
+def winner(): # returns winning letter if there is a winner else returns None
+    if _ := vertical_winner():
+        return _
+    if _ := horizontal_winner():
+        return _
+    if _ := diagonal_winner():
+        return _
     return None
+
+def do_move(c):
+    """Accept a move and render on the board."""
+    move(c)
+    print()
+    print_board()
 
 def main():
     # Main game loop
@@ -64,15 +82,11 @@ def main():
     create_board()
     print_board()
     while not is_full() and not winner(): # run until someone wins or the board is full
-        move('X')
-        print()
-        print_board()
+        do_move('X')
         if is_full() or winner():
             # breaks out of the loop if 'X' alredy won by the last move or the board got full
             break
-        move('O')
-        print()
-        print_board()
+        do_move('O')
     if winner():
         print(f'{winner()} wins!')
     elif is_full():
